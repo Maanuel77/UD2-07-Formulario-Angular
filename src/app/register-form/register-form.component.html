@@ -1,0 +1,129 @@
+<main class="page-shell">
+  <section class="intro" aria-labelledby="page-title">
+    <div class="brand-mark" aria-hidden="true">C</div>
+    <p class="eyebrow">COMUNIDAD DIGITAL</p>
+    <h1 id="page-title">Tu próximo capítulo<br>empieza aquí.</h1>
+    <p class="intro-copy">Crea tu cuenta para formar parte de una comunidad que aprende y crece junta.</p>
+    <div class="intro-note">
+      <span class="note-icon" aria-hidden="true">✦</span>
+      <span>Un registro sencillo. Nuevas posibilidades.</span>
+    </div>
+  </section>
+
+  <section class="form-panel" aria-labelledby="form-title">
+    <div class="form-heading">
+      <p class="eyebrow">EMPECEMOS</p>
+      <h2 id="form-title">Crear una cuenta</h2>
+      <p>Completa tus datos para registrarte.</p>
+    </div>
+
+    <form #registroForm="ngForm" (ngSubmit)="registrar(registroForm)" novalidate>
+      <div class="field-grid">
+        <label class="field">
+          <span>Nombre <span class="required">*</span></span>
+          <input type="text" name="nombre" [(ngModel)]="datos.nombre" #nombre="ngModel"
+            placeholder="Tu nombre" autocomplete="given-name" required>
+          @if (nombre.invalid && (nombre.touched || enviado)) {
+            <small class="error">Escribe tu nombre.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Apellidos <span class="required">*</span></span>
+          <input type="text" name="apellidos" [(ngModel)]="datos.apellidos" #apellidos="ngModel"
+            placeholder="Tus apellidos" autocomplete="family-name" required>
+          @if (apellidos.invalid && (apellidos.touched || enviado)) {
+            <small class="error">Escribe tus apellidos.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>NIF <span class="required">*</span></span>
+          <input type="text" name="nif" [(ngModel)]="datos.nif" #nif="ngModel"
+            placeholder="12345678A" autocomplete="off" required>
+          @if (nif.invalid && (nif.touched || enviado)) {
+            <small class="error">Introduce tu NIF.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Email <span class="required">*</span></span>
+          <input type="email" name="email" [(ngModel)]="datos.email" #email="ngModel"
+            placeholder="tu&#64;correo.com" autocomplete="email" required email>
+          @if (email.invalid && (email.touched || enviado)) {
+            <small class="error">Introduce un email válido.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Teléfono <span class="required">*</span></span>
+          <input type="tel" name="telefono" [(ngModel)]="datos.telefono" #telefono="ngModel"
+            placeholder="600 123 456" autocomplete="tel" required>
+          @if (telefono.invalid && (telefono.touched || enviado)) {
+            <small class="error">Introduce tu teléfono.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Sexo <span class="required">*</span></span>
+          <select name="sexo" [(ngModel)]="datos.sexo" #sexo="ngModel" required>
+            <option value="" disabled>Selecciona una opción</option>
+            <option value="Mujer">Mujer</option>
+            <option value="Hombre">Hombre</option>
+            <option value="Otro">Otro</option>
+            <option value="Prefiero no decirlo">Prefiero no decirlo</option>
+          </select>
+          @if (sexo.invalid && (sexo.touched || enviado)) {
+            <small class="error">Selecciona una opción.</small>
+          }
+        </label>
+
+        <label class="field field-full">
+          <span>¿Cómo conociste la página? <span class="required">*</span></span>
+          <select name="origen" [(ngModel)]="datos.origen" #origen="ngModel" required>
+            <option value="" disabled>Selecciona una opción</option>
+            <option value="Buscando en Google">Buscando en Google</option>
+            <option value="A través de un amigo">A través de un amigo</option>
+            <option value="Por mi profesor">Por mi profesor</option>
+          </select>
+          @if (origen.invalid && (origen.touched || enviado)) {
+            <small class="error">Selecciona cómo nos conociste.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Contraseña <span class="required">*</span></span>
+          <input type="password" name="contrasena" [(ngModel)]="datos.contrasena" #contrasena="ngModel"
+            placeholder="Mínimo 8 caracteres" autocomplete="new-password" required minlength="8">
+          @if (contrasena.invalid && (contrasena.touched || enviado)) {
+            <small class="error">La contraseña debe tener al menos 8 caracteres.</small>
+          }
+        </label>
+
+        <label class="field">
+          <span>Confirmar contraseña <span class="required">*</span></span>
+          <input type="password" name="confirmarContrasena" [(ngModel)]="datos.confirmarContrasena"
+            #confirmarContrasena="ngModel" placeholder="Repite tu contraseña"
+            autocomplete="new-password" required>
+          @if (confirmarContrasena.invalid && (confirmarContrasena.touched || enviado)) {
+            <small class="error">Confirma tu contraseña.</small>
+          } @else if (enviado && datos.contrasena !== datos.confirmarContrasena) {
+            <small class="error">Las contraseñas no coinciden.</small>
+          }
+        </label>
+      </div>
+
+      <label class="terms">
+        <input type="checkbox" name="aceptaTerminos" [(ngModel)]="datos.aceptaTerminos"
+          #aceptaTerminos="ngModel" required>
+        <span>Acepto los <a href="#terminos">términos y condiciones</a> del registro. <span class="required">*</span></span>
+      </label>
+      @if (aceptaTerminos.invalid && (aceptaTerminos.touched || enviado)) {
+        <small class="error terms-error">Debes aceptar los términos para continuar.</small>
+      }
+
+      <button type="submit">Crear mi cuenta <span aria-hidden="true">→</span></button>
+      <p class="required-note"><span class="required">*</span> Campos obligatorios</p>
+    </form>
+  </section>
+</main>
